@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaLista.Web", "src\NinjaLista.Web\NinjaLista.Web.csproj", "{B4CA0326-B086-4275-A9B7-01CF8B8E57EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaLista.DAL", "src\NinjaLista.DAL\NinjaLista.DAL.csproj", "{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4CA0326-B086-4275-A9B7-01CF8B8E57EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CA0326-B086-4275-A9B7-01CF8B8E57EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CA0326-B086-4275-A9B7-01CF8B8E57EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CA0326-B086-4275-A9B7-01CF8B8E57EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

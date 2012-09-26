@@ -1,0 +1,97 @@
+﻿/* CSS Document */
+
+/*CSS Reset*/
+body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol, li, dl, dt, dd, form, a, fieldset, input, th, td { margin: 0; padding: 0; border: 0; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+ul, ol { list-style: none; }
+.floatleft { float: left; }
+.floatright { float: right; }
+/*End CSS Reset*/
+
+html { background-image: url(/img/body-bg.png); background-repeat: repeat; }
+body, input { font-family:Verdana, Geneva, sans-serif; color:#3c3c3c; font-size:11px; }
+input { color:#666; }
+p { line-height:18px; }
+a:link, a:visited, .asterisk { color:#50002e; text-decoration:none; font-weight:normal; }
+a:hover { text-decoration:underline; color:#f7008e; }
+/*Promo-boxes and Adds*/
+.promo-box { width:180px; margin-bottom:20px; }
+.site-add { border: 1px solid #cecece; width:164px; background-color:#e3e3e3; padding:8px; margin-bottom:20px; text-align:center; color:#999; text-transform:uppercase; font-size:9px; font-weight:bold; }
+/*End Promo-boxes and Adds*/
+
+/*button master*/
+.button:link, .button:visited, input.button { border-top: 1px solid #d23590; background: #da007e; padding: 5.5px 11px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; -moz-box-shadow: rgba(0,0,0,1) 0 1px 0; box-shadow: rgba(0,0,0,1) 0 1px 0; text-shadow: rgba(0,0,0,.4) 0 1px 0; color: #ffffff; font-size: 10px; font-family: Verdana, Geneva, sans-serif; text-decoration: none; vertical-align: middle; text-transform:uppercase; font-weight:bold; cursor:pointer;}
+.button:hover { border-top-color: #ff0c98; background: #ff0c98; color: #ffffff; }
+.button:active { border-top-color: #7f0049; background: #7f0049; position:relative; top: 1px; }
+/*button master*/
+
+
+/*Login area*/
+#login-main { width:100%; background-color:#222; color:#fff; font-weight:bold; font-size:10px;  }
+#login-container { width:993px; height:24px; margin:0 auto; padding-top: 6px; overflow:hidden; }
+#login-container a:link, #login-container a:visited { color:#e9ce1a; }
+#login-container a:hover { text-decoration:underline; }
+#login-container .country { width:300px; float:left; padding-left:5px; }
+#login-container .country img { margin:0 7px 0 0; }
+#login-container .social { float:right; text-align:center; margin-right:10px; overflow:hidden; min-width:226px; }
+#login-container .social p { float:left; margin-right:10px; }
+#login-container .social img { margin:1px 7px 0 0; float:left; }
+#login-container .details { float:right; padding: 0 10px; }
+#login-container .details p { display:inline; margin:0px 5px; }
+#login-container .country p { float:left; margin:0px 10px; }
+/*End login area*/
+
+/*Header*/
+#header-main { width:993px; margin: 0 auto; overflow:hidden; }
+#logo { margin-left: 10px; margin-top: 10px; float:left; }
+#header-right { float:right; width:683px; overflow:hidden; }
+#add-top { margin-top:15px; width:468px; height:60px; float:right; padding-left:10px; }
+#navbar { float:right; margin-top:28px; *width:593px; }
+#navbar li { float:left; color:#fff; background-color:#333; margin-left:1px; padding:10px 0px; }
+#navbar li a:link, #navbar li a:visited { color:#fff; font-weight:bold; padding:10px 26px; text-decoration:none; }
+#navbar li a:hover, #navbar .selected { background-color:#e30386; }
+#navbar li.ad-bt-nav { background-color:#e30386; margin-left:15px; }
+#navbar li.ad-bt-nav a:hover { background-color:#FF0C98; }
+/*End Header*/
+
+/*Content*/
+#content-main { width:953px; border: 1px solid #dbdbdb; background-color:#fff; margin:0 auto; padding:20px; overflow:hidden; box-shadow:0 0 5px #dcdcdc; }
+#content-left { width:182px; float:left; overflow:hidden; }
+#content-right { width:749px; float:right; overflow:hidden; margin-left:20px; }
+/*End Content*/
+
+/*SearchBox*/
+#search-container { width:100%; overflow:hidden; margin-bottom:15px; }
+#searchbox { background-color:#dbdbdb; width:941px; height:28px; padding:6px 6px 6px 15px; font-weight:bold; float:left; }
+#searchbox p, #searchbox input { float:left; }
+#searchbox p { margin-top:8px; color:#404040; }
+#searchbox .search-fields { width:330px; height: 21px; margin:0px 17px; padding:2px 0 3px 5px; }
+#searchbox .submit-search { border-top: 1px solid #d23590; background: #da007e; padding: 5.5px 11px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; -moz-box-shadow: rgba(0,0,0,1) 0 1px 0; box-shadow: rgba(0,0,0,1) 0 1px 0; text-shadow: rgba(0,0,0,.4) 0 1px 0; color: #ffffff; font-size: 10px; font-family: Verdana, Geneva, sans-serif; text-decoration: none; vertical-align: middle; text-transform:uppercase; font-weight:bold; }
+#fb-like { width:182px; float:right; height:35px; }
+#searchbox .button { *width:80px;}
+/*End SearchBox*/
+
+/*Breadcrumb*/
+.breadcrumb { overflow:hidden; margin-bottom:15px; width:100%; }
+.breadcrumb p { font-weight:bold; font-size:10px; float:left; margin-right:7px; }
+/* End Breadcrumb*/
+
+/*Footer*/
+#footer-main { width:953px; border:1px solid #dbdbdb; margin:0 auto; margin-top:20px; margin-bottom:20px; padding:20px; font-weight:bold; background-color:#fff;  box-shadow:0 0 5px #dcdcdc}
+#newsletter { background-color:#e30386; height:24px; padding:6px 10px; }
+#newsletter input { width:373px; height:23px; color:#3c3c3c; padding-left:5px; }
+#newsletter input.button { width:90px; background:#000; color:#fff; border:none; cursor:pointer; padding:0 0 2px; }
+#newsletter input.button:hover { background:#121212; }
+#newsletter .submit-nl { width:77px; height:23px; background-color:#000; color:#fff; margin-left:10px; font-weight:bold; cursor:pointer; text-transform:uppercase; font-size:9px; }
+#newsletter p { color:#fff; float:left; margin-top:4px; margin-right:40px; }
+#footer-nav { background-color:#686868; height:23px; color:#fff; margin-top:1px; font-size:10px; padding:14px 6px 0 6px; }
+#footer-nav ul li { float:left; padding:0px 5px; border-right:1px solid #fff; }
+#footer-nav img { float:right; margin:0px 2px; }
+#footer-nav a:link, #footer-nav a:visited { color:#fff; text-decoration:none; }
+#footer-nav a:hover { text-decoration:underline; }
+#copy { width:100%; font-size:10px; margin-top:10px; font-weight:normal; }
+#copy p { color:#666; }
+/*End Footer*/
+
+
+ul.list-item li{ list-style:disc; padding-left:1px; margin-left:10px;}
