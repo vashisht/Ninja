@@ -66,7 +66,7 @@
             <div class="ad-details">
                 <div class="ad-content">
                     <p><%=Model.Description %></p>
-                    <p>email: <a href="#"><%=Model.Email%></a></p>
+                    <p>email: <a href="#"><%=Html.Encode(Model.Email)%></a></p>
                     <div class="reply-ad-bt"><%=Html.ActionLink("responda ao anúncio", "ReplyAd", "Home", new { id = Model.AdId}, new { @class = "button" })%></div>
                 </div>
                 <div class="ad-gallery">

@@ -59,7 +59,11 @@
             <h1><%=Model.AdTitle %></h1>
          <p class="back-results"><a href="<%=Url.DetailsUrl(Model.AdTitle,Model.Category,Model.AdId)%>"> < Back to ad</a></p>
               <div class="asterisk2">Campos marcados com <span class="asterisk">*</span> são mandatórios.</div> 
-       <div class="reply-ad-form">            
+       <div class="reply-ad-form"> 
+           <%= Html.HiddenFor(x => x.AdId) %>
+           <%= Html.HiddenFor(x => x.AdTitle) %>
+           <%= Html.HiddenFor(x => x.Category) %>
+           <%= Html.HiddenFor(x => x.ToEmailAddress) %>
             <label><span>Seu nome *</span> <%=Html.TextBoxFor(x=>x.Name) %>
            
             </label>          

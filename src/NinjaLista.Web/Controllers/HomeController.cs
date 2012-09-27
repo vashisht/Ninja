@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using NinjaLista.Models;
 using Ninjalista.DAL.Entities;
 using Ninjalista.DAL.Repositories;
-using System.Web.Mail;
+using System.Net.Mail;
 using System.Configuration;
 
 
@@ -55,15 +55,10 @@ namespace Ninjalista.Controllers
                 PopulateSubjects();
                 return View();
             }
-           
-                var mailmessage = new MailMessage();
-                mailmessage.From = emailDetails.EmailAddress;
-                mailmessage.To = "admin@ninjalista.com";
-                mailmessage.Subject = emailDetails.SelectedSubject;
-                mailmessage.Body = emailDetails.Message;
-                SmtpMail.SmtpServer = "auth.smtp.1and1.co.uk";
-                SmtpMail.Send(mailmessage);
-                return RedirectToAction("Index");
+
+            var mailMessage = new MailMessage(emailDetails.EmailAddress, "admin@ninjalista.com", emailDetails.SelectedSubject,  emailDetails.Message);
+            SendEmail(mailMessage);        
+            return RedirectToAction("Index");
             
            
         }
@@ -84,11 +79,12 @@ namespace Ninjalista.Controllers
         public ActionResult ReplyAd(int id)
         {
             ReplyAdDetails replyad = new ReplyAdDetails();
-            replyad.ToEmailAddress = "admin@ninjalista.com";
-            var adDetails = _Repository.GetAdvertDetails(id);
-            replyad.AdTitle = adDetails.Title;
+            
+           var adDetails = _Repository.GetAdvertDetails(id);
+            replyad.ToEmailAddress = adDetails.Email;
+             replyad.AdTitle = adDetails.Title;
             replyad.Category = adDetails.Category;
-            replyad.AdId = adDetails.AdId;
+           replyad.AdId = id;
             return View(replyad);
         }
 
@@ -97,14 +93,27 @@ namespace Ninjalista.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            var mailmessage = new MailMessage();
-            mailmessage.From = replyDetails.FromEmail;
-            mailmessage.To = replyDetails.ToEmailAddress;
-            mailmessage.Subject = "Message for your Ad";
-            mailmessage.Body = replyDetails.Message;
-            SmtpMail.SmtpServer = "auth.smtp.1and1.co.uk";
-            SmtpMail.Send(mailmessage);
-            return RedirectToAction("Confirmation");
+           // var details = _Repository.GetAdvertDetails(replyDetails.AdId);
+
+            var subject = string.Format("{0} {1}","Reply For", replyDetails.AdTitle);
+            var mailMessage = new MailMessage(replyDetails.FromEmail, replyDetails.ToEmailAddress, replyDetails.AdTitle, replyDetails.Message);
+                      
+            
+            return RedirectToAction("Confirmation", "Home");
+        }
+
+       public void SendEmail(MailMessage msg)
+        {
+           var host = ConfigurationManager.AppSettings["host"];
+           var userName = ConfigurationManager.AppSettings["userName"];
+           var password = ConfigurationManager.AppSettings["password"];
+
+            var smtp = new SmtpClient(host);
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential(userName, password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.EnableSsl = false;
+            smtp.Send(msg);
         }
        
         public ActionResult Details(string category, string title,int Id)
@@ -112,6 +121,7 @@ namespace Ninjalista.Controllers
             var details = new AdvertismentDetails();
             details = _Repository.GetAdvertDetails(Id);
             details.Category = category;
+            details.AdId = Id;
             return View(details);
         }
 
@@ -212,13 +222,7 @@ namespace Ninjalista.Controllers
                     //send an Email to admin
                     if (Boolean.Parse(ConfigurationManager.AppSettings["SendEmail"]))
                     {
-                        var mailmessage = new MailMessage();
-                        mailmessage.From = ConfigurationManager.AppSettings["AdminEmailAddress"];
-                        mailmessage.To = ConfigurationManager.AppSettings["AdminEmailAddress"];
-                        mailmessage.Subject = "New Advertisement Created";
-                        mailmessage.Body = string.Format("{0} {1}", ConfigurationManager.AppSettings["NewAdvertCreatedMsg"], DateTime.Now.Date);
-                        SmtpMail.SmtpServer = "auth.smtp.1and1.co.uk";
-                        SmtpMail.Send(mailmessage);
+                       //functionality to send confirmation msg to client
                     }
                     return RedirectToAction("Confirmation", "Home");
                 }
@@ -238,7 +242,7 @@ namespace Ninjalista.Controllers
         public ActionResult AdResults(string categoryName, int page = 1)
         {
             int id = 0;
-            int pageSize = 1;
+            int pageSize = 10;
 
             id = _Repository.GetCategoryId(categoryName);
             if (id == 0)
