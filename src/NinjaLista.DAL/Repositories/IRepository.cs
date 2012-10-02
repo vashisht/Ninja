@@ -15,5 +15,6 @@ namespace Ninjalista.DAL.Repositories
         void AddPicture(string guid);
         List<string> GetSubjects();
         AdvertismentDetails GetAdvertDetails(int id);
+        List<SubCategory> GetSubCategoriesByCategoryId(int CategoryId);
     }
 }

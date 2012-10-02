@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/Scripts/MicrosoftMvcValidation.js"></script>
     <%--    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>--%>
     <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -27,11 +28,30 @@
 
         $(function(){
         $('#btnpreview').click(){
+
+
         });
-        }
+        });
     </script>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
+
+    
+    <style type="text/css">
+         
+        .field-validation-error
+        {
+            color:Red;
+        }
+        
+        .error
+        {
+            color:Red;
+        }
+</style>
+
+
+
 </head>
 <body>
     <%=Html.Partial("Login")%>
@@ -53,6 +73,7 @@
             <!--Form post an ad-->
             <%Html.EnableClientValidation(); %>
               <% using (Html.BeginForm("PostAd", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) %>
+              
             <%{%>
             <div class="post-ad-form">
                 <label>
@@ -60,45 +81,86 @@
                     <%=Html.DropDownListFor(x => x.CateogryId, new SelectList(Model.Categories, "CategoryId", "CategoryName"))%></label>
                 <label>
                     <span>Sub category *</span>
-                    <%=Html.DropDownListFor(x => x.SubCateogryId, new SelectList(Model.SubCategories, "SubCategoryId", "SubCategoryName"))%>
+                  <%--  <%=Html.DropDownListFor(x => x.SubCateogryId, new SelectList(Model.SubCategories, "SubCategoryId", "SubCategoryName"))%>--%>
+                   <div id="subcatdiv">
+                    <%Html.RenderAction("SubCategoryDropdown", "Home");%>
+                    
+                    
+                    </div>
                 </label>
                 <label>
                     <span>Title *</span><%=Html.TextBoxFor(x => x.Title)%></label><%=Html.ValidationMessageFor(x=>x.Title) %>
                 <label>
-                    <span>Description *</span><%=Html.TextAreaFor(x=>x.Description)%></label><%=Html.ValidationMessageFor(x => x.Description)%>
+                    <span style=" margin-right:109px;">Description *</span><%=Html.TextAreaFor(x=>x.Description)%></label><%=Html.ValidationMessageFor(x => x.Description)%>
                 <label>
                     <span>Location *</span><%=Html.TextBoxFor(x=>x.Location)%></label><%=Html.ValidationMessageFor(x => x.Location)%>
                 <label>
                     <span>Email para contato *</span><%=Html.TextBoxFor(x=>x.Email)%></label><%=Html.ValidationMessageFor(x => x.Email)%>
+
+                    <h2 style="background-color: #EAEAEA;">
+                    Adicione imagens ao seu anúncio</h2>
+                <p style="background-color: #EAEAEA;">
+                    Anúncios com imagens atraem mais visitas, não perca a oportunidade de se destacar
+                    na página de resultados.</p>
+
+                    
+                    <label>
+                    <span>Images</span>
+                    <input  type="file"  id="Image1" name="Image1"   onchange="readURL(this);"/>
+                    <input  type="file"  id="Image2" name="Image2"  onchange="readURL2(this);"/>
+                    <input  type="file"  id="Image3" name="Image3"  onchange="readURL3(this);"/>
+
+
+                    
+                            
+                            
+                            </label>
+
+                            <div class="img-upload" style="background-color:white; margin-left:245px;">
+                
+                    
+                    <div class="uploader-img" >
+                        <img src="/img/Default.png" id="imgsrc1"><a href="#" id="delimg1">
+                            Delete</a>
+                            </div>
+                            <div class="uploader-img">
+                        <img src="/img/Default.png" id="imgsrc2"><a href="#" id="delimg2">
+                            Delete</a></div>
+                            <div class="uploader-img">
+                            <img src="/img/Default.png" id="imgsrc3"><a href="#" id="delimg3">
+                            Delete</a>
+                            </div>
+             
+            </div>
+                            
+
+                             <div class="img-upload" style="background-color:white; margin-left:245px;">
+                             <div style="display: block; float:left; width: 100%; margin-bottom: 10px;">
+                <img style="border:0px none; height: 80px; float:left;" src="/Captcha" id="captchaImg"  />
+                <a href="javascript:;" id="change-captcha-link" title="Change Image" style="margin-top: 35px; height: 26px; width: 27px;">
+                </a></div>
+                <br />
+                
+                Enter the code shown above:<br /><input type="text" name="captchaString" id="captchaString" style="width: 150px; float:left;"/>
+                            
+                            </div>
+
+
+                            </div>
+                    
+
+
+                
+
             </div>
             <!--Form post an ad-->
             <!--image upload-->
-            <div class="img-upload">
-                <h2>
-                    Adicione imagens ao seu anúncio</h2>
-                <p>
-                    Anúncios com imagens atraem mais visitas, não perca a oportunidade de se destacar
-                    na página de resultados.</p>
-                <div class="uploader">
-                    <div id="file-uploader-demo1">
-                        <noscript>
-                            <p>
-                                Please enable JavaScript to use file uploader.</p>
-                            <!-- or put a simple form for upload here -->
-                        </noscript>
-                    </div>
-                    <div class="qq-upload-extra-drop-area">
-                        Drop 1</div>
-                    <div class="uploader-img">
-                        <img src="/img/thumb.jpg"><a href="#">Defina como imagem principal</a> | <a href="#">
-                            Remover</a></div>
-                </div>
-            </div>
+            
             <!--end image upload-->
           
             <div class="submit-post">
                  <input type="submit" value="postar esse anúncio"  class="button" />
-                  <input type="submit" value="pré-visualização"   class="button" /></div>
+                  <input type="submit" value="pré-visualização"   class="button"  style="display:none;" /></div>
               
            
             <% }%>
@@ -129,5 +191,133 @@
         // don't wait for the window to load  
         window.onload = createUploader;     
     </script>
+
+    
+
 </body>
 </html>
+  
+  <script type="text/javascript" >
+
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#imgsrc1').attr('src', e.target.result);
+              }
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      function readURL2(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#imgsrc2').attr('src', e.target.result);
+              }
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      function readURL3(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#imgsrc3').attr('src', e.target.result);
+              }
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  
+  </script>
+
+  <script type="text/javascript">
+      $('#delimg1').click(function () {
+          $('#imgsrc1').attr('src', "/img/Default.png");
+          $('#Image1').val('');
+
+
+      });
+
+      $('#delimg2').click(function () {
+          $('#imgsrc2').attr('src', "/img/Default.png");
+          $('#Image2').val('');
+
+
+      });
+
+      $('#delimg3').click(function () {
+          $('#imgsrc3').attr('src', "/img/Default.png");
+          $('#Image3').val('');
+
+
+      });
+</script>
+  <script type="text/javascript">
+
+
+      $('#CateogryId').change(function () {
+
+          //alert($('#CateogryId').val());
+          $('#subcatdiv').load('/SubCategoryDropdown', $('#form0').serialize(), function () {
+
+          });
+
+      });
+
+  
+
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+ 
+            $('#form0').validate({
+
+                rules: {
+                    'captchaString': {
+                        required: true,
+                        remote: {
+                            url: "/ValidateCaptcha",
+                            type: "post",
+                            data: {
+                                captchaString: function () {
+                                    //alert($("#captchaString").val());
+                                    return $("#captchaString").val();
+                                }
+                            }
+                        }
+                    }
+                },
+                messages: {
+                    'captchaString': {
+                        required: 'Please enter verification code above in image',
+                        remote: 'Please enter valid verification code in the image above'
+                    }
+                }
+
+
+            });
+//        });
+        
+
+
+        var cptcount = 1;
+
+        $('#change-captcha-link').click(function () {
+            $('#captchaImg').attr('src', '/Captcha/?newId=' + cptcount);
+            $('#captchaString').val('');
+            cptcount++;
+            return false;
+        });
+
+
+        });
+
+
+
+</script>

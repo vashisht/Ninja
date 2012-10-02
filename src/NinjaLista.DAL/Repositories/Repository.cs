@@ -8,7 +8,7 @@ using Ninjalista.DAL.Entities;
 namespace Ninjalista.DAL.Repositories
 {
     public class Repository : IRepository
-    {
+            {
         private static string ConnectionString;
         public Repository()
         {
@@ -38,7 +38,7 @@ namespace Ninjalista.DAL.Repositories
         {
 
              const string commandString =
-                @"SELECT ID,Title,Location,PostedDate FROM AdvertisementDetails where SubCategoryId=@SubCategoryId";
+                @"SELECT ID,Title,Location,PostedDate,Image1,Image2,Image3 FROM AdvertisementDetails where SubCategoryId=@SubCategoryId";
 
             //const string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\kommanap\Gustin\Gustin\App_Data\Gustin.mdf;Integrated Security=True;User Instance=True";
             using (var connection = new SqlConnection(ConnectionString))
@@ -57,6 +57,9 @@ namespace Ninjalista.DAL.Repositories
                             details.Title = (string)reader["Title"];
                             details.PostedDate = (DateTime)reader["PostedDate"];
                             details.Location=(string)reader["Location"];
+                            details.Image1  = (string)reader["Image1"];
+                            details.Image2 = (string)reader["Image2"];
+                            details.Image2 = (string)reader["Image3"];
                             advertisementDetails.Add(details);
 
 
@@ -73,7 +76,7 @@ namespace Ninjalista.DAL.Repositories
         {
 
             const string commandString =
-               @"SELECT ID,Title,Location,PostedDate,Email,Description,Cat.CategoryName
+               @"SELECT ID,Title,Location,PostedDate,Email,Description,Cat.CategoryName,Ad.Image1,Ad.Image2,Ad.Image3
 FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.CategoryId where Id = @id";
 
             //const string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\kommanap\Gustin\Gustin\App_Data\Gustin.mdf;Integrated Security=True;User Instance=True";
@@ -95,6 +98,9 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
                             details.Description =(string)reader["Description"];
                             details.Email = (string)reader["Email"];
                             details.Category = (string)reader["CategoryName"];
+                            details.Image1 = (string)reader["Image1"];
+                            details.Image2 = (string)reader["Image2"];
+                            details.Image3 = (string)reader["Image3"];
 
                         }
                     }
@@ -116,6 +122,8 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
                 var command = GetCommand(commandString, connection, CommandType.Text);
                 var subCategories = new List<SubCategory>();
                 {
+
+
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -126,6 +134,39 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
                             subCategory.CategoryId = (int)reader["CategoryID"];
                             subCategories.Add(subCategory);
                         }
+                    }
+                }
+                return subCategories;
+            }
+        }
+
+
+        public List<SubCategory> GetSubCategoriesByCategoryId(int CategoryId)
+        {
+            const string commandString =
+               @"SELECT SubCategoryID, SubCategoryName, CategoryID
+                                                FROM SubCategories WHERE CategoryID = @CategoryId";
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var command = GetCommand(commandString, connection, CommandType.Text);
+                var subCategories = new List<SubCategory>();
+                {
+
+                    command.Parameters.Add("@CategoryId", CategoryId);
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var subCategory = new SubCategory();
+                            subCategory.SubCategoryId = (int)reader["SubCategoryID"];
+                            subCategory.SubCategoryName = (string)reader["SubCategoryName"];
+                            subCategory.CategoryId = (int)reader["CategoryID"];
+                            subCategories.Add(subCategory);
+                        }
+
+                    }
                     }
                 }
                 return subCategories;
@@ -189,7 +230,7 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
         public void SaveAd(AdvertismentDetails advertismentDetails)
         {
             const string commandString = @"INSERT INTO AdvertisementDetails
-                         (SubCategoryId,Title,Description,Location,Email,PostedDate,CategoryId) VALUES (@subcategoryId,@title,@description,@location,@email,@postedDate,@categoryId)";
+                         (SubCategoryId,Title,Description,Location,Email,PostedDate,CategoryId,Image1,Image2,Image3) VALUES (@subcategoryId,@title,@description,@location,@email,@postedDate,@categoryId,@Image1,@Image2,@Image3)";
 
             // const string connectionString = @"Data Source=.\SQLEXPRESS;AttachDbFilename=C:\Users\kommanap\Gustin\Gustin\App_Data\Gustin.mdf;Integrated Security=True;User Instance=True";
 
@@ -206,6 +247,9 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
                     command.Parameters.Add("@email", advertismentDetails.Email);
                     command.Parameters.Add("@postedDate", DateTime.Now.Date);
                     command.Parameters.Add("@categoryId", advertismentDetails.CateogryId);
+                    command.Parameters.Add("@Image1", advertismentDetails.Image1);
+                    command.Parameters.Add("@Image2", advertismentDetails.Image2);
+                    command.Parameters.Add("@Image3", advertismentDetails.Image3);
                     command.ExecuteNonQuery();
                 }
             }

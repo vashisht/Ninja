@@ -98,7 +98,7 @@
         <%{ %>
           <div class="post-standard">
             <div class="post-inner-lft">
-              <div class="post-img"><a href="details.html"><img src="images/thumb.jpg" /></a></div>
+              <div class="post-img"><a href="details.html"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + m.Image1)%>&width=80&height=50" /></a></div>
               <div class="post-title">
                 <h3><a href="<%=Url.DetailsUrl(m.Title,Model.CurrentCategory,m.AdId)%>"><%=m.Title %></a></h3>               
               </div>

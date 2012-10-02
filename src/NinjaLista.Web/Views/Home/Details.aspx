@@ -12,6 +12,7 @@
     <title>Details</title>
    <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
+    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -61,19 +62,22 @@
      <!--content-right-->
      <div id="content-right">
         <div class="gen-box">
-            <h1><%=Model.Title %></h1>
+            <h1><%=Model.Title    %></h1>
             <p class="back-results"><a href="<%=Url.ResultsUrl(Model.Category,"1") %>"> < Back to results</a></p>
             <div class="ad-details">
                 <div class="ad-content">
                     <p><%=Model.Description %></p>
+                    <p>&nbsp;</p>
+                    <p>Location: <%=Model.Location %></p>
+                    
                     <p>email: <a href="#"><%=Html.Encode(Model.Email)%></a></p>
                     <div class="reply-ad-bt"><%=Html.ActionLink("responda ao anúncio", "ReplyAd", "Home", new { id = Model.AdId}, new { @class = "button" })%></div>
                 </div>
                 <div class="ad-gallery">
-                    <div class="ad-main-image"><img src="images/ad-main-img.png" width="266"></div>
-                    <div class="ad-thumb"><img src="images/thumb.jpg"></div>
-                    <div class="ad-thumb"><img src="images/thumb.jpg"></div>
-                    <div class="ad-thumb"><img src="images/thumb.jpg"></div>
+                    <div class="ad-main-image"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] +  Model.Image1)%>&width=266&height=176"  id="mainimage" /></div>
+                    <div class="ad-thumb" ><a id="aimg1"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image1)%>&width=80&height=50" id="image1" src1="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image1)%>&width=266&height=176" /></a></div>
+                    <div class="ad-thumb" ><a id="aimg2"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image2)%>&width=80&height=50" id="image2" src1="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image2)%>&width=266&height=176" /></a></div>
+                    <div class="ad-thumb"><a id="aimg3"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image3)%>&width=80&height=50" id="image3" src1="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + Model.Image3)%>&width=266&height=176" /></a></div>
                     
                 </div>
                 <div class="ad-footer">
@@ -92,3 +96,32 @@
 <!--End Footer-->
 </body>
 </html>
+<script type="text/javascript">
+    $('#aimg1').click(function () {
+        var src = $('#image1').attr('src1');
+
+        
+        $('#mainimage').attr('src', src);
+
+
+
+    });
+
+    $('#aimg2').click(function () {
+
+        var src = $('#image2').attr('src1');
+        $('#mainimage').attr('src', src);
+
+
+
+    });
+
+    $('#aimg3').click(function () {
+
+        var src = $('#image3').attr('src1');
+        $('#mainimage').attr('src', src);
+
+
+
+    });
+</script>

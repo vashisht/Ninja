@@ -24,6 +24,11 @@ namespace Ninjalista
             routes.MapRoute("DetailsPage", //RouteName
                             "details/{category}/{title}/{Id}",
                             new { controller = "Home", action = "Details", category = "", title = "", Id="" });
+
+            routes.MapRoute("details", //RouteName
+                            "details",
+                            new { controller = "Home", action = "details" }
+                );
             
             routes.MapRoute("Contact", //RouteName
                             "contato",
@@ -60,6 +65,23 @@ namespace Ninjalista
             routes.MapRoute("Confirmation",
                              "Confirmation"
                              , new { controller = "Home" , Action = "Confirmation" });
+            routes.MapRoute("SubCategoryDropdown",
+                             "SubCategoryDropdown"
+                             , new { controller = "Home", Action = "SubCategoryDropdown" });
+
+            routes.MapRoute("Captcha",
+                             "Captcha"
+                             , new { controller = "Home", Action = "Captcha" });
+
+            routes.MapRoute("ValidateCaptcha",
+                            "ValidateCaptcha"
+                            , new { controller = "Home", Action = "ValidateCaptcha" });
+
+            routes.MapRoute("FixedSizeImage",
+                            "FixedSizeImage"
+                            , new { controller = "Photo", Action = "FixedSizeImage" });
+
+            
 
             routes.MapRoute( "ErrorPage",
                              "Error"

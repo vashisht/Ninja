@@ -9,8 +9,11 @@ using System.Web.Mvc;
 using NinjaLista.Models;
 using Ninjalista.DAL.Entities;
 using Ninjalista.DAL.Repositories;
+using NinjaLista.Web.CaptchaServices;
 using System.Net.Mail;
 using System.Configuration;
+using System.Drawing;
+
 
 
 namespace Ninjalista.Controllers
@@ -20,12 +23,14 @@ namespace Ninjalista.Controllers
     {
         //
         private readonly IRepository _Repository = new Repository();
+        private readonly NinjaLista.Web.CaptchaServices.ICaptchaService captchaService = new DefaultCaptchaService();
         //
         // GET: /Home/
         public HomeController(){}
-        public HomeController(IRepository repository)
+        public HomeController(IRepository repository, NinjaLista.Web.CaptchaServices.ICaptchaService captchaService)
         {
             _Repository = repository;
+            this.captchaService = captchaService;
         }
 
         public ActionResult Index()
@@ -148,6 +153,34 @@ namespace Ninjalista.Controllers
             return View(advertisementDetails);
         }
 
+
+        public ActionResult SubCategoryDropdown()
+        {
+
+
+
+            var subcategorydetail = new SubCategoryDetails();
+
+
+            Dictionary<string, object> uf = new Dictionary<string, object>();
+
+            int catId = 1;
+
+                if (Request.QueryString.Keys.Count > 0)
+                {
+                     catId = Convert.ToInt32(Request.QueryString["CateogryId"]);
+                                    
+                }
+
+
+                subcategorydetail.SubCategories = _Repository.GetSubCategoriesByCategoryId(catId);
+
+                return View(subcategorydetail);
+            
+          
+        }
+
+
         [HttpPost]
         public JsonResult UploadImage(string qqFile)
         {
@@ -218,11 +251,101 @@ namespace Ninjalista.Controllers
             {
                 try
                 {
+                    advertisementDetails.PostedDate = DateTime.Now;
+                    var relPath = ConfigurationManager.AppSettings["DirAddImages"]; 
+                    //"/Content/AdImages";
+
+                    string guidstring = Guid.NewGuid().ToString();
+
+                    string directory = Server.MapPath(relPath);
+                    string filePath = System.IO.Path.Combine(directory, guidstring + "_1" + ".");
+                    advertisementDetails.Image3 = "";
+                    advertisementDetails.Image2 = "";
+                    advertisementDetails.Image1 = "";
+                    HttpPostedFileBase file = Request.Files["Image1"];
+
+                    string filename = "";
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        filename = file.FileName;
+
+                        string[] strfile = filename.Split(".".ToCharArray());
+
+                        int a = strfile.Length;
+
+                        filePath = filePath + strfile[a - 1];
+
+                        if (System.IO.Directory.Exists(directory))
+                        {
+                            file.SaveAs(filePath);
+
+                            advertisementDetails.Image1 =  "/" + System.IO.Path.GetFileName(filePath);
+                        }
+
+                        
+                    }
+
+                    filePath = System.IO.Path.Combine(directory, guidstring + "_2" + ".");
+
+                     file = Request.Files["Image2"];
+
+                     filename = "";
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        filename = file.FileName;
+
+                        string[] strfile = filename.Split(".".ToCharArray());
+
+                        int a = strfile.Length;
+
+                        filePath = filePath + strfile[a - 1];
+
+                        if (System.IO.Directory.Exists(directory))
+                        {
+                            file.SaveAs(filePath);
+
+                            advertisementDetails.Image2 =  "/" + System.IO.Path.GetFileName(filePath);
+                        }
+
+
+                    }
+
+
+                    filePath = System.IO.Path.Combine(directory, guidstring + "_3" + ".");
+
+                    file = Request.Files["Image3"];
+
+                    filename = "";
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        filename = file.FileName;
+
+                        string[] strfile = filename.Split(".".ToCharArray());
+
+                        int a = strfile.Length;
+
+                        filePath = filePath + strfile[a - 1];
+
+                        if (System.IO.Directory.Exists(directory))
+                        {
+                            file.SaveAs(filePath);
+
+                            advertisementDetails.Image3 = "/" + System.IO.Path.GetFileName(filePath);
+                        }
+
+
+                    }
+
+
                     _Repository.SaveAd(advertisementDetails);
                     //send an Email to admin
                     if (Boolean.Parse(ConfigurationManager.AppSettings["SendEmail"]))
                     {
-                       //functionality to send confirmation msg to client
+                        var mailMessage = new MailMessage(advertisementDetails.Email, "admin@ninjalista.com", advertisementDetails.Title, advertisementDetails.Description );
+                        SendEmail(mailMessage);     
                     }
                     return RedirectToAction("Confirmation", "Home");
                 }
@@ -276,6 +399,39 @@ namespace Ninjalista.Controllers
        {
            return View();
        }
+
+
+        public ActionResult Captcha()
+        {
+            string captchaString = captchaService.GenerateRandomString();
+
+            Bitmap c = captchaService.GetCaptcha(captchaString, 200, 100);
+
+            System.IO.MemoryStream imageStream = new System.IO.MemoryStream();
+            c.Save(imageStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            Session["CaptchaString"] = captchaString;
+
+            return new FileContentResult(imageStream.ToArray(), "image/jpg");
+        }
+
+        public ActionResult ValidateCaptcha(string captchaString)
+        {
+            if (string.IsNullOrEmpty(captchaString))
+            {
+                return Json(false);
+            }
+            if (("" + Session["CaptchaString"]).ToLower() != captchaString.ToLower())
+            {
+                return Json(false);
+            }
+            else
+            {
+                return Json(true);
+            }
+        }
+
+
        
     }
  }
