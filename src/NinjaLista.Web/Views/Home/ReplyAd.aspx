@@ -76,11 +76,10 @@
              <label> <span>Sua mensagem *</span><%=Html.TextAreaFor(x => x.Message, new { @class = "message"})%> </label>        
              <%=Html.ValidationSummary() %>
               <div class="ad-bt"><input type="submit" class="button" value="responda ao anúncio" title="button" id="reply-ad-button" />
-               </div>                      
+               </div>  
+                
           </div>
-        
-         <%} %>
- <div class="" style="border:1px solid #c8c8c8; padding:5px; background-color:#fff; float:left; width:223px; margin: 20px 0 0 100px; padding:10px;">
+        <div class="" style="border:1px solid #c8c8c8; padding:5px; background-color:#fff; float:left; width:223px; margin: 20px 0 0 100px; padding:10px;">
  <h3>Dicas de segurança</h3><br />
 
  <p>Nunca passe seus dados pessoais como número de cartão ou conta bancaria para desconhecidos.</p>
@@ -91,7 +90,9 @@
 
 
  
- </div>
+ </div>                    
+         <%} %>
+
     </div>
     </div>
     <!--Footer-->

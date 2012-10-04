@@ -57,9 +57,9 @@ namespace Ninjalista.DAL.Repositories
                             details.Title = (string)reader["Title"];
                             details.PostedDate = (DateTime)reader["PostedDate"];
                             details.Location=(string)reader["Location"];
-                            details.Image1  = (string)reader["Image1"];
-                            details.Image2 = (string)reader["Image2"];
-                            details.Image2 = (string)reader["Image3"];
+                            details.Image1  = !(DBNull.Value.Equals(reader["Image1"]))?(string) reader["Image1"]:string.Empty;
+                            details.Image2 = !(DBNull.Value.Equals(reader["Image2"]))? (string)reader["Image2"]: string.Empty;
+                            details.Image2 = !(DBNull.Value.Equals(reader["Image3"]))?(string)reader["Image3"]:string.Empty;
                             advertisementDetails.Add(details);
 
 
@@ -98,9 +98,9 @@ FROM AdvertisementDetails Ad Join Categories cat on Cat.CategoryId = Ad.Category
                             details.Description =(string)reader["Description"];
                             details.Email = (string)reader["Email"];
                             details.Category = (string)reader["CategoryName"];
-                            details.Image1 = (string)reader["Image1"];
-                            details.Image2 = (string)reader["Image2"];
-                            details.Image3 = (string)reader["Image3"];
+                            details.Image1 = !(DBNull.Value.Equals(reader["Image1"])) ? (string)reader["Image1"] : string.Empty;
+                            details.Image2 = !(DBNull.Value.Equals(reader["Image2"])) ? (string)reader["Image2"] : string.Empty;
+                            details.Image2 = !(DBNull.Value.Equals(reader["Image3"])) ? (string)reader["Image3"] : string.Empty;
 
                         }
                     }

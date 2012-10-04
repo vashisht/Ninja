@@ -96,15 +96,16 @@ namespace Ninjalista.Controllers
         [HttpPost]
         public ActionResult ReplyAd(ReplyAdDetails replyDetails)
         {
-            if (!ModelState.IsValid)
-                return View();
-           // var details = _Repository.GetAdvertDetails(replyDetails.AdId);
+            if (ModelState.IsValid)
+            {
+                var subject = string.Format("{0} {1}", "Reply For", replyDetails.AdTitle);
+                var mailMessage = new MailMessage(replyDetails.FromEmail, replyDetails.ToEmailAddress, replyDetails.AdTitle, replyDetails.Message);
 
-            var subject = string.Format("{0} {1}","Reply For", replyDetails.AdTitle);
-            var mailMessage = new MailMessage(replyDetails.FromEmail, replyDetails.ToEmailAddress, replyDetails.AdTitle, replyDetails.Message);
-                      
+
+                return RedirectToAction("Confirmation", "Home");
+            }
+            return View(replyDetails);
             
-            return RedirectToAction("Confirmation", "Home");
         }
 
        public void SendEmail(MailMessage msg)
