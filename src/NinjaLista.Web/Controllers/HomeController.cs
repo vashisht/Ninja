@@ -10,7 +10,7 @@ using NinjaLista.Models;
 using Ninjalista.DAL.Entities;
 using Ninjalista.DAL.Repositories;
 using NinjaLista.Web.CaptchaServices;
-using System.Net.Mail;
+using System.Web.Mail;
 using System.Configuration;
 using System.Drawing;
 
@@ -61,7 +61,11 @@ namespace Ninjalista.Controllers
                 return View();
             }
 
-            var mailMessage = new MailMessage(emailDetails.EmailAddress, "admin@ninjalista.com", emailDetails.SelectedSubject,  emailDetails.Message);
+            var mailMessage = new MailMessage();
+            mailMessage.From =   emailDetails.EmailAddress;
+            mailMessage.To = "admin@ninjalista.com";
+            mailMessage.Subject = emailDetails.SelectedSubject;
+            mailMessage.Body =emailDetails.Message;
             SendEmail(mailMessage);        
             return RedirectToAction("Index");
             
@@ -99,8 +103,12 @@ namespace Ninjalista.Controllers
             if (ModelState.IsValid)
             {
                 var subject = string.Format("{0} {1}", "Reply For", replyDetails.AdTitle);
-                var mailMessage = new MailMessage(replyDetails.FromEmail, replyDetails.ToEmailAddress, replyDetails.AdTitle, replyDetails.Message);
-
+                var mailMessage = new MailMessage();
+                mailMessage.From = replyDetails.FromEmail;
+                mailMessage.To = replyDetails.ToEmailAddress;
+                mailMessage.Subject = replyDetails.AdTitle;
+                mailMessage.Body = replyDetails.Message;
+                SendEmail(mailMessage);
 
                 return RedirectToAction("Confirmation", "Home");
             }
@@ -111,15 +119,12 @@ namespace Ninjalista.Controllers
        public void SendEmail(MailMessage msg)
         {
            var host = ConfigurationManager.AppSettings["host"];
-           var userName = ConfigurationManager.AppSettings["userName"];
-           var password = ConfigurationManager.AppSettings["password"];
+           
 
-            var smtp = new SmtpClient(host);
-            smtp.Port = 587;
-            smtp.Credentials = new System.Net.NetworkCredential(userName, password);
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.EnableSsl = false;
-            smtp.Send(msg);
+           SmtpMail.SmtpServer = host;
+       
+           SmtpMail.Send(msg);
+           
         }
        
         public ActionResult Details(string category, string title,int Id)
@@ -345,7 +350,11 @@ namespace Ninjalista.Controllers
                     //send an Email to admin
                     if (Boolean.Parse(ConfigurationManager.AppSettings["SendEmail"]))
                     {
-                        var mailMessage = new MailMessage(advertisementDetails.Email, "admin@ninjalista.com", advertisementDetails.Title, advertisementDetails.Description );
+                        var mailMessage = new MailMessage();
+                        mailMessage.To =  advertisementDetails.Email;
+                        mailMessage.From =   "admin@ninjalista.com";
+                        mailMessage.Subject=   advertisementDetails.Title;
+                        mailMessage.Body =    advertisementDetails.Description;
                         SendEmail(mailMessage);     
                     }
                     return RedirectToAction("Confirmation", "Home");
