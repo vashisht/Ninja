@@ -57,7 +57,7 @@
 .uploader-img { float:left; margin-right:10px; width:120px; text-align:center; }
 .uploader-img img { width: 112px; height:70px; border:1px solid #dbdbdb; }
 .ad-bt { float:right; margin: 10px 10px 10px 0; }
-.submit-post {width:340px; height:100px; margin:0 auto; margin-top:20px;}
+.submit-post {width:340px; min-height:100px; margin:0 auto; margin-top:20px;}
 /*post an ad*/
 
 

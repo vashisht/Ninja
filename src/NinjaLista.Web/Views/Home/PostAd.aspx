@@ -26,12 +26,12 @@
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
 
-        $(function(){
-        $('#btnpreview').click(){
+//        $(function(){
+//        $('#btnpreview').click(){
 
 
-        });
-        });
+//        });
+//        });
     </script>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
@@ -44,10 +44,21 @@
             color:Red;
         }
         
-        .error
-        {
-            color:Red;
-        }
+    
+        div.message{
+    /*background: transparent url(msg_arrow.gif) no-repeat scroll left center;*/
+    padding-left: 7px;
+}
+
+.error{
+    background-color:#F3E6E6;
+    border-color: #924949;
+   /* border-style: solid solid solid none;*/
+    border-width: 2px;
+    padding: 5px;
+    color:Red;
+}
+
 </style>
 
 
@@ -89,14 +100,15 @@
                     </div>
                 </label>
                 <label>
-                    <span>Title *</span><%=Html.TextBoxFor(x => x.Title)%></label><%=Html.ValidationMessageFor(x=>x.Title) %>
+                    <span>Title *</span><%=Html.TextBoxFor(x => x.Title)%></label>
                 <label>
-                    <span style=" margin-right:109px;">Description *</span><%=Html.TextAreaFor(x=>x.Description)%></label><%=Html.ValidationMessageFor(x => x.Description)%>
+                    <span style=" margin-right:109px;">Description *</span><%=Html.TextAreaFor(x=>x.Description)%></label>
                 <label>
-                    <span>Location *</span><%=Html.TextBoxFor(x=>x.Location)%></label><%=Html.ValidationMessageFor(x => x.Location)%>
+                    <span>Location *</span><%=Html.TextBoxFor(x=>x.Location)%></label>
                 <label>
-                    <span>Email para contato *</span><%=Html.TextBoxFor(x=>x.Email)%></label><%=Html.ValidationMessageFor(x => x.Email)%>
+                    <span>Email para contato *</span><%=Html.TextBoxFor(x=>x.Email)%></label>
 
+                  <div style="background-color:#EAEAEA; float:left;" >
                     <h2 style="background-color: #EAEAEA;">
                     Adicione imagens ao seu anúncio</h2>
                 <p style="background-color: #EAEAEA;">
@@ -106,9 +118,11 @@
                     
                     <label>
                     <span>Images</span>
-                    <input  type="file"  id="Image1" name="Image1"   onchange="readURL(this);"/>
-                    <input  type="file"  id="Image2" name="Image2"  onchange="readURL2(this);"/>
-                    <input  type="file"  id="Image3" name="Image3"  onchange="readURL3(this);"/>
+                    
+                    <input  type="file"  id="Image1" name="Image1" title="Adicionar imagem" value="Adicionar imagem" style="display:none;"   onchange="readURL(this);" />
+                    
+                    <input  type="file"  id="Image2" name="Image2" style="display:none;"  onchange="readURL2(this);"/>
+                    <input  type="file"  id="Image3" name="Image3" style="display:none;"  onchange="readURL3(this);"/>
 
 
                     
@@ -116,23 +130,27 @@
                             
                             </label>
 
-                            <div class="img-upload" style="background-color:white; margin-left:245px;">
+                            <div class="img-upload" style=" margin-left:245px;">
                 
                     
                     <div class="uploader-img" >
-                        <img src="/img/Default.png" id="imgsrc1"><a href="#" id="delimg1">
-                            Delete</a>
+                        <img src="/img/thumb.jpg" id="imgsrc1">
+                            <a href="#" id="upfile1" style="cursor:pointer" >Adicionar imagem</a>  <a href="#" id="delimg1">Remover</a>
                             </div>
                             <div class="uploader-img">
-                        <img src="/img/Default.png" id="imgsrc2"><a href="#" id="delimg2">
-                            Delete</a></div>
+                        <img src="/img/thumb.jpg" id="imgsrc2">
+                            <a href="#" id="upfile2" style="cursor:pointer" >Adicionar imagem</a> 
+                            <a href="#" id="delimg2">
+                            Remover</a></div>
                             <div class="uploader-img">
-                            <img src="/img/Default.png" id="imgsrc3"><a href="#" id="delimg3">
-                            Delete</a>
+                            <img src="/img/thumb.jpg" id="imgsrc3">
+                            <a href="#" id="upfile3" style="cursor:pointer" >Adicionar imagem</a> 
+                            <a href="#" id="delimg3">
+                            Remover</a>
                             </div>
              
             </div>
-                            
+                            </div>
 
                              <div class="img-upload" style="background-color:white; margin-left:245px;">
                              <div style="display: block; float:left; width: 100%; margin-bottom: 10px;">
@@ -144,7 +162,9 @@
                 Enter the code shown above:<br /><input type="text" name="captchaString" id="captchaString" style="width: 150px; float:left;"/>
                             
                             </div>
+                            
 
+                            
 
                             </div>
                     
@@ -159,6 +179,10 @@
             <!--end image upload-->
           
             <div class="submit-post">
+            <p id="Message" style="color:Red; padding-bottom:10px;">
+            
+            
+            </p>
                  <input type="submit" value="postar esse anúncio"  class="button" />
                   <input type="submit" value="pré-visualização"   class="button"  style="display:none;" /></div>
               
@@ -206,6 +230,9 @@
               reader.onload = function (e) {
                   $('#imgsrc1').attr('src', e.target.result);
               }
+              $('#delimg1').show();
+              
+
 
               reader.readAsDataURL(input.files[0]);
           }
@@ -217,7 +244,7 @@
               reader.onload = function (e) {
                   $('#imgsrc2').attr('src', e.target.result);
               }
-
+              $('#delimg2').show();
               reader.readAsDataURL(input.files[0]);
           }
       }
@@ -228,7 +255,7 @@
               reader.onload = function (e) {
                   $('#imgsrc3').attr('src', e.target.result);
               }
-
+              $('#delimg3').show();
               reader.readAsDataURL(input.files[0]);
           }
       }
@@ -236,26 +263,43 @@
   </script>
 
   <script type="text/javascript">
-      $('#delimg1').click(function () {
-          $('#imgsrc1').attr('src', "/img/Default.png");
+      $('#delimg1').click(function (e) {
+          e.preventDefault();
+          $('#imgsrc1').attr('src', "/img/thumb.jpg");
           $('#Image1').val('');
 
-
+          $('#delimg1').hide();
+          
+          
       });
 
-      $('#delimg2').click(function () {
-          $('#imgsrc2').attr('src', "/img/Default.png");
+      $('#delimg2').click(function (e) {
+          e.preventDefault();
+          $('#imgsrc2').attr('src', "/img/thumb.jpg");
           $('#Image2').val('');
 
+       
+          $('#delimg2').hide();
+          
+
+
 
       });
 
-      $('#delimg3').click(function () {
-          $('#imgsrc3').attr('src', "/img/Default.png");
+      $('#delimg3').click(function (e) {
+          e.preventDefault();
+          $('#imgsrc3').attr('src', "/img/thumb.jpg");
           $('#Image3').val('');
 
+          $('#delimg3').hide();
+
+
 
       });
+
+
+      
+
 </script>
   <script type="text/javascript">
 
@@ -274,36 +318,93 @@
 </script>
 
 <script type="text/javascript">
-$(document).ready(function () {
- 
-            $('#form0').validate({
+    $("#upfile1").click(function (e) {
+        e.preventDefault();
+        $("#Image1").trigger('click');
+    });
+    $("#upfile2").click(function (e) {
+        e.preventDefault();
+        $("#Image2").trigger('click');
+    });
+    $("#upfile3").click(function (e) {
+        e.preventDefault();
+        $("#Image3").trigger('click');
+    });
+    $(document).ready(function () {
 
-                rules: {
-                    'captchaString': {
-                        required: true,
-                        remote: {
-                            url: "/ValidateCaptcha",
-                            type: "post",
-                            data: {
-                                captchaString: function () {
-                                    //alert($("#captchaString").val());
-                                    return $("#captchaString").val();
-                                }
+        $('#delimg1').hide();
+        $('#delimg2').hide();
+        $('#delimg3').hide();
+
+        var submitted = false;
+        $('#form0').validate({
+            rules: {
+                'Title': {
+                    required: true
+                },
+                'Description': {
+                    required: true
+                },
+                'Location': {
+                    required: true
+                },
+                'Email': {
+                    required: true,
+                    email: true
+                },
+                'captchaString': {
+                    required: true,
+                    remote: {
+                        url: "/ValidateCaptcha",
+                        type: "post",
+                        data: {
+                            captchaString: function () {
+                                //alert($("#captchaString").val());
+                                return $("#captchaString").val();
                             }
                         }
                     }
-                },
-                messages: {
-                    'captchaString': {
-                        required: 'Please enter verification code above in image',
-                        remote: 'Please enter valid verification code in the image above'
-                    }
                 }
 
+            },
+            messages: {
+                'Title': {
+                    required: 'Please enter Title'
+                },
+                'Description': {
+                    required: 'Please enter Description'
+                },
+                'Location': {
+                    required: 'Please enter Location'
+                },
+                'Email': {
+                    required: 'Please enter Email'
+                },
+                'captchaString': {
+                    required: 'Please enter verification code above in image',
+                    remote: 'Please enter valid verification code in the image above'
+                }
+            },
+            showErrors: function (errorMap, errorList) {
+                if (submitted) {
+                    var summary = "";
+                    $.each(errorList, function () { summary += " * " + this.message + "<br/>"; });
 
-            });
-//        });
-        
+                    //alert(summary);
+                    submitted = false;
+                    $('#Message').html(summary);
+                }
+                //this.defaultShowErrors();
+            },
+            invalidHandler: function (form, validator) {
+                submitted = true;
+            }
+
+
+
+        });
+        //        });
+
 
 
         var cptcount = 1;
@@ -316,7 +417,7 @@ $(document).ready(function () {
         });
 
 
-        });
+    });
 
 
 
