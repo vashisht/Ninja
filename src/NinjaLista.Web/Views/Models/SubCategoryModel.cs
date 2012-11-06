@@ -9,6 +9,7 @@ namespace NinjaLista.Views.Models
     public class SubCategoryModel
     {
         public List<SubCategory> subcats { get; set; }
+        public List<Category> catlist { get; set; }
         
         
     }

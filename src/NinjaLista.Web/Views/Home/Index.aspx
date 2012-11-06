@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<NinjaLista.Views.Models.CategoryModel>" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -6,10 +6,12 @@
     <meta name="robots" content="noindex">
     <link sizes="57x57" href="/img/icon.png" rel="apple-touch-icon-precomposed" />
     <link sizes="114x114" href="/img/icon-pc-hd.png" rel="apple-touch-icon-precomposed" />
-    <title>Ninjalista | Classificados para a Comunidade Brasileira em Londres</title>
+    <title>Ninjalista | Classificados para a comunidade de língua portuguesa no Reino Unido</title>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/Home.css") %>" />
-    <meta name="description" content="O Ninjalista é o maior site de classificados gratuitos da comunidade Brasileira em Londres e no Reino Unido. Encontre serviços por categorias, ofertas de empregos, acomodação para Brasileiros e muito mais." />
+    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
+    <meta name="description" content="O Ninjalista é o maior site de classificados gratuitos da comunidade de língua portuguesa em Londres e no Reino Unido. Encontre serviços por categorias, ofertas de empregos, acomodação para Brasileiros e Portugueses e muito mais." />
    <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-31478694-1']);
@@ -35,91 +37,111 @@
         <!--Breadcrumb-->
         <div class="breadcrumb">
             <p>
-                You are in:
+                Você está em:
             </p>
-            <p>
-                <a href="/">Home ></a></p>
+           
             <p>
                 Home</p>
+                <p><%=TempData["error"]%></p>
         </div>
         <!--End Breadcrumb-->
         <!--content-left-->
         <div id="content-left">
             <div class="promo-box">
-                <a href="#">
+                <a href="http://www.facebook.com/ninjalista" target="_blank">
                     <img src="/img/fb-like.png" width="180" /></a></div>
             <div class="site-add">
                 <a href="#">
                     <img src="/img/add.jpg" width="164" height="600" /></a>
                 <p>
-                    advertisement</p>
+                    Anúncios</p>
             </div>
         </div>
         <!--End content-left-->
         <!--content-right-->
         <div id="content-right">
-            <div class="column-1">
-                <h2 class="servicos">
-                   <a href="/Servicos">Serviços</a> </h2>
-                <ul>
-                    <li><a href="/Agencias de viagem">Agências de viagem</a></li>
-                    <li><a href="/Baba">Bába</a></li>
-                    <li><a href="/Comida brasileira">Comida brasileira</a></li>
-                    <li><a href="/Construção e reformas">Construção e reformas</a></li>
-                    <li><a href="/Cursos escolas e aulas">Cursos, escolas e aulas</a></li>
-                    <li><a href="/Dinheiro e finanças">Dinheiro e finanças</a></li>
-                    <li><a href="/Espiritualidade e esoterismo">Espiritualidade e esoterismo</a></li>
-                    <li><a href="/Organização de festas e eventos">Organização de festas e eventos</a></li>
-                    <li><a href="/Serviços de informática">Serviços de informática</a></li>
-                    <li><a href="/Transporte e mudanças">Transporte e mudanças</a></li>
-                    <li><a href="/Oficinas mecânicas">Oficinas mecânicas</a></li>
-                    <li><a href="/Publicidade e propaganda">Publicidade e propaganda</a></li>
-                    <li><a href="/Roupas e acessórios">Roupas e acessórios</a></li>
-                    <li><a href="/Salões de beleza">Salões de beleza</a></li>
-                </ul>
-            </div>
-            <div class="column-2">
-                <h2 class="acomodacao">
-                 <a href="/Acomodacao">Acomodação</a>   </h2>
-                <ul>
-                    <li><a href="/Casas para aluguel">Casas para aluguel</a></li>
-                    <li><a href="/Apartamentos para aluguel">Apartamentos para aluguel</a></li>
-                    <li><a href="/Quartos para aluguel">Quartos para aluguel</a></li>
-                    <li><a href="/Escritórios e imóveis comerciais">Escritórios e imóveis comerciais</a></li>
-                </ul>
-                <h2 class="comunidade">
-                 <a href="/Comunidade">Comunidade</a></h2>
-                <ul>
-                    <li><a href="/Baladas">Baladas</a></li>
-                    <li><a href="/Bares e restaurantes">Bares e restaurantes</a></li>
-                    <li><a href="/Concertos e shows">Concertos e shows</a></li>
-                    <li><a href="/Eventos">Eventos</a></li>
-                    <li><a href="/Grupos de apoio">Grupos de apoio</a></li>
-                    <li><a href="/Grupos e encontros">Grupos e encontros</a></li>
-                    <li><a href="/Ingrejas e religião">Ingrejas e religião</a></li>
-                </ul>
-            </div>
-            <div class="column-3">
-                <h2 class="empregos">
-                  <a href="/Empregos">Empregos</a>  </h2>
-                <ul>
-                    <li><a href="/Ofertas de emprego">Ofertas de emprego</a></li>
-                    <li><a href="/Buscando trabalho">Buscando trabalho</a></li>
-                    <li><a href="/Trabalhos temporários">Trabalhos temporários</a></li>
-                </ul>
-                <h2 class="relacionamento">
-                  <a href="/Relacionamento">Relacionamento</a>  </h2>
-                <ul>
-                    <li><a href="/Homens à procura de mulheres">Homens à procura de mulheres</a></li>
-                    <li><a href="/Mulheres à procura de homens">Mulheres à procura de homens</a></li>
-                    <li><a href="/Relacionamento casual">Relacionamento casual</a></li>
-                    <li><a href="/Relacionamento sério">Relacionamento sério</a></li>
-                    <li><a href="/Novas amizades">Novas amizades</a></li>
-                    <li><a href="/Conexões perdidas">Conexões perdidas</a></li>
-                    <li><a href="/Desabafo">Desabafo</a></li>
-                </ul>
-            </div>
+        <div class="column-1">
+        <%foreach (var item in Model.catlist) %>
+        <%{ %>
+        <% if(item.Ordr < Convert.ToDecimal(2) ) %>
+        <%{ %>
+        
+                <h2 class="<%=item.CategoryName.ToLower()%>">
+                   <a href="/cat/<%=item.CategoryName.ToLower().Replace(" ","-") + "/" + item.CategoryId %>"><%=item.CategoryName  %></a> </h2>
+                   <% if (item.subcategoylist != null && item.subcategoylist.Count > 0) %>
+                   <%{ %>
+                   <ul>
+                   <% foreach (var dtl in item.subcategoylist) %>
+                   <%{ %>
+                   <li><a href="/<%= dtl.CategoryName.ToLower().Replace(" ","-") + "/" + dtl.SubCategoryName.ToLower().Replace(" ", "-") + "/" + dtl.SubCategoryId %>"><%=dtl.SubCategoryName  %></a></li>
+
+                   <%} %>
+
+                   
+                   </ul>
+                   <%} %>
+                   
+
+        <%} %>
+        <%} %>
+        </div>
+
+        <div class="column-2">
+        <%foreach (var item in Model.catlist) %>
+        <%{ %>
+        <% if(item.Ordr > Convert.ToDecimal(2)  && item.Ordr < Convert.ToDecimal(3)) %>
+        <%{ %>
+        
+                <h2 class="<%=item.CategoryName.ToLower() %>">
+                   <a href="/cat/<%=item.CategoryName.ToLower().Replace(" ","-") + "/" + item.CategoryId %>"><%=item.CategoryName%></a> </h2>
+                   <% if (item.subcategoylist != null && item.subcategoylist.Count > 0) %>
+                   <%{ %>
+                   <ul>
+                   <% foreach (var dtl in item.subcategoylist) %>
+                   <%{ %>
+                   <li><a href="/<%= dtl.CategoryName.ToLower().Replace(" ","-") + "/" + dtl.SubCategoryName.ToLower().Replace(" ", "-") + "/" + dtl.SubCategoryId %>"><%=dtl.SubCategoryName  %></a></li>
+
+                   <%} %>
+
+                   
+                   </ul>
+                   <%} %>
+                   
+
+        <%} %>
+        <%} %>
+        </div>
+
+        <div class="column-3">
+        <%foreach (var item in Model.catlist) %>
+        <%{ %>
+        <% if(item.Ordr > Convert.ToDecimal(3)  ) %>
+        <%{ %>
+        
+                <h2 class="<%=item.CategoryName.ToLower() %>">
+                   <a href="/cat/<%=item.CategoryName.ToLower().Replace(" ","-") + "/" + item.CategoryId %>"><%=item.CategoryName%></a> </h2>
+                   <% if (item.subcategoylist != null && item.subcategoylist.Count > 0) %>
+                   <%{ %>
+                   <ul>
+                   <% foreach (var dtl in item.subcategoylist) %>
+                   <%{ %>
+                   <li><a href="/<%= dtl.CategoryName.ToLower().Replace(" ","-") + "/" + dtl.SubCategoryName.ToLower().Replace(" ", "-") + "/" + dtl.SubCategoryId %>"><%=dtl.SubCategoryName %></a></li>
+
+                   <%} %>
+
+                   
+                   </ul>
+                   <%} %>
+                   
+
+        <%} %>
+        <%} %>
+        </div>
+        
+        
+            
             <!--Adds-->
+            <!--
             <div id="ad-bottom">
                 <div class="wrapper">
                     <div class="list-carousel">
@@ -151,9 +173,9 @@
                     </div>
                     <br />
                 </div>
-            </div>
+            </div> -->
             <!--End Adds-->
-             <%Html.RenderPartial("PopularCategories"); %>
+             <%Html.RenderPartial("PopularCategories", Model); %>
         </div>
         <!--End content-right-->
         <!--End content-main-->

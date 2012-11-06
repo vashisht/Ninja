@@ -7,7 +7,8 @@
 <meta name="robots" content="noindex">
 <link sizes="57x57" href="/img/icon.png" rel="apple-touch-icon-precomposed" />
 <link sizes="114x114" href="/img/icon-pc-hd.png" rel="apple-touch-icon-precomposed" />
-<title>contact</title>
+
+<title>Entre em contato conosco</title>
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-31478694-1']);
@@ -23,6 +24,7 @@
      <script type="text/javascript" src="/Scripts/MicrosoftAjax.js"></script>
     <script type="text/javascript" src="/Scripts/MicrosoftMvcValidation.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.uploadify-3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>"/>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>"/>
@@ -42,10 +44,9 @@
         <!--Breadcrumb-->
         <div class="breadcrumb">
             <p>
-                You are in:
+                Você está em:
             </p>
-            <p>
-                <a href="/">Home </a>></p>
+           
             <p>
                 Contato</p>
         </div>
@@ -53,13 +54,13 @@
         <!--content-left-->
         <div id="content-left">
             <div class="promo-box">
-                <a href="#">
+                <a href="http://www.facebook.com/ninjalista" target="_blank">
                     <img src="/img/fb-like.png" width="180" /></a></div>
             <div class="site-add">
                 <a href="#">
                     <img src="/img/add.jpg" width="164" height="600" /></a>
                 <p>
-                    advertisement</p>
+                    Anúncios</p>
             </div>
         </div>
         <!--End content-left-->
@@ -68,11 +69,11 @@
             <!--Partners-->
             <div class="gen-box">
                 <h1>
-                    Contact</h1>
+                    Entre em contato</h1>
                 <div class="partners-intro">
                     <p>
-                        Lorem Ipsum is simply dummy text of the <strong>printing and typesetting industry</strong>.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                        <strong>Dúvidas, perguntas, sugestões?</strong><br />
+ Use o formulário abaixo para entrar em contato conosco.   </p>
                 </div>
                 <%Html.EnableClientValidation(); %>
                     <% using (Html.BeginForm("Contato", "Home", FormMethod.Post, new { enctype = "multipart/form-data" })) %>
@@ -80,19 +81,19 @@
                 <div class="contact-ad-form">
              
                     <label>
-                        <span>Your name *</span>
+                        <span>Seu nome *</span>
                         <%=Html.TextBoxFor(x=>x.Name) %>
                     </label>
                     <label>
-                        <span>Your email address *</span>
+                        <span>Seu email *</span>
                         <%=Html.TextBoxFor(x=>x.EmailAddress) %>
                     </label>
                     <label>
-                    <span>Subject *</span>
+                    <span>Assunto *</span>
                     <%=Html.DropDownListFor(x => x.SelectedSubject, new SelectList((List<SelectListItem>)ViewData["Subjects"], "Value", "Text"), new { @class = "select" })%>
                     </label>
                     <label>
-                        <span>Your message *</span>
+                        <span>Sua mensagem *</span>
                         <%=Html.TextAreaFor(x => x.Message, new { @class = "contact-ad-form message" })%>
                     </label>
                     <%=Html.ValidationSummary() %>

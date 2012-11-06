@@ -12,6 +12,8 @@ namespace NinjaLista.Views.Models
         public int ItemsPerPage { get; set; }
         public int CurrentPage { get; set; }
         public string CurrentCategory { get; set; }
+        public string SubCurrentCategory { get; set; }
+        public string type { get; set; }
         public int TotalPages
         {
             get { return (int)Math.Ceiling((Decimal)TotalItems / ItemsPerPage); }

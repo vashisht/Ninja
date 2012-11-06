@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaLista.Web", "src\Ninja
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaLista.DAL", "src\NinjaLista.DAL\NinjaLista.DAL.csproj", "{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaListaAdmin.Web", "src\NinjaListaAdmin.Web\NinjaListaAdmin.Web.csproj", "{FD868D15-72F5-426C-BCFB-63A3F0EF91A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CF187CE-202C-48D7-A2FA-0AFC0F47D81A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD868D15-72F5-426C-BCFB-63A3F0EF91A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD868D15-72F5-426C-BCFB-63A3F0EF91A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD868D15-72F5-426C-BCFB-63A3F0EF91A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD868D15-72F5-426C-BCFB-63A3F0EF91A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@ namespace NinjaLista
 {
     public static class HtmlHelpers
     {
-        public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo, string category)
+        public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo,int Id, string category)
         {
             var results = new StringBuilder();
            UrlHelper urlHelper = new UrlHelper(html.ViewContext.RequestContext);
@@ -19,7 +19,7 @@ namespace NinjaLista
            if(pagingInfo.HasPreviousPage)
            {
                TagBuilder tag = new TagBuilder("a");
-               tag.MergeAttribute("href", urlHelper.ResultsUrl(category,(pagingInfo.CurrentPage - 1).ToString()));
+               tag.MergeAttribute("href", urlHelper.ResultsUrl((pagingInfo.type != "" ? pagingInfo.type + "/" : pagingInfo.CurrentCategory + "/") + category,Id,(pagingInfo.CurrentPage - 1).ToString()));
                tag.InnerHtml = "<<";
                tag.AddCssClass("First");
                results.Append(tag.ToString());
@@ -28,7 +28,8 @@ namespace NinjaLista
             for (int page = 1; page <= pagingInfo.TotalPages; page++)
             {
                 TagBuilder tag = new TagBuilder("a"); //construct an <a> tag
-                tag.MergeAttribute("href", urlHelper.ResultsUrl(category,page.ToString()));
+
+                tag.MergeAttribute("href", urlHelper.ResultsUrl((pagingInfo.type != "" ? pagingInfo.type + "/" : pagingInfo.CurrentCategory + "/") + category, Id, page.ToString()));
                 tag.InnerHtml = page.ToString();
                 if (page == pagingInfo.CurrentPage)
                     tag.AddCssClass("page larger");
@@ -40,7 +41,7 @@ namespace NinjaLista
             if (pagingInfo.HasNextPage)
             {
                 TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", urlHelper.ResultsUrl(category, (pagingInfo.CurrentPage + 1).ToString()));
+                tag.MergeAttribute("href", urlHelper.ResultsUrl((pagingInfo.type != "" ? pagingInfo.type + "/" : pagingInfo.CurrentCategory + "/") + category, Id, (pagingInfo.CurrentPage + 1).ToString()));
                 tag.InnerHtml = ">>";
                 tag.AddCssClass("Last");
                 results.Append(tag.ToString());

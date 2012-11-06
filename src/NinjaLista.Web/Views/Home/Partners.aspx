@@ -11,6 +11,8 @@
 <title>partners</title>
   <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>"/>
   <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>"/>
+  <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
 <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -40,12 +42,11 @@
         <!--Breadcrumb-->
         <div class="breadcrumb">
             <p>
-                You are in:
+                Você está em:
             </p>
+            
             <p>
-                <a href="#">Home ></a></p>
-            <p>
-                Home</p>
+                Parceiros</p>
         </div>
         <!--End Breadcrumb-->
         <!--content-left-->
@@ -57,13 +58,13 @@
                 <a href="#">
                     <img src="/img/add.jpg" width="164" height="600" /></a>
                 <p>
-                    advertisement</p>
+                    Anúncios</p>
             </div>
             <div class="site-add">
                 <a href="#">
                     <img src="/img/add2.jpg" width="164" height="271" /></a>
                 <p>
-                    advertisement</p>
+                    Anúncios</p>
             </div>
         </div>
         <!--End content-left-->
@@ -72,7 +73,7 @@
             <!--Partners-->
             <div class="gen-box">
                 <h1>
-                    Partners (Parceiros)</h1>
+                    Parceiros</h1>
                 <div class="partners-intro">
                     <p>
                         Lorem Ipsum is simply dummy text of the <strong>printing and typesetting industry</strong>.

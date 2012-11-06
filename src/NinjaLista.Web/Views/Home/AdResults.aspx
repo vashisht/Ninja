@@ -7,9 +7,11 @@
     <meta name="robots" content="noindex">
     <link sizes="57x57" href="/img/icon.png" rel="apple-touch-icon-precomposed" />
     <link sizes="114x114" href="/img/icon-pc-hd.png" rel="apple-touch-icon-precomposed" />
-    <title>Results page</title>
+    <title>Ninjalista | Classificados para a comunidade de língua portuguesa no Reino Unido |Resultados</title>
    <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
+    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -45,7 +47,7 @@
     
     <!--Breadcrumb-->
     <div class="breadcrumb">
-      <p>You are in: </p> 
+      <p>Você está em:</p> 
       <p><a href="/">Home </a>></p>
       <p><%=Model.CurrentCategory%></p>
     </div>
@@ -55,28 +57,7 @@
     <div id="content-left">
     
     
-    <div class="refine">
-    <h2>Refine your search</h2>
-    <ul>
-    <li><a href="#">Offered Jobs</a><span class="count">(25.112)</span></li>
-        <li><a href="#">Wanted Jobs</a><span class="count">(25.112)</span></li>
-    </ul>
-    
-   
-    <h2>Other categories</h2>
-    <ul>
-    <li><a href="/Acomodacao">Acomodação</a></li>
-        <li><a href="/Restaurantes">Restaurantes</a></li>
-                <li><a href="/Empregos">Empregos</a></li>
-                        <li><a href="/Agencia%20de%20viagem">Agencia de viagem</a></li>
-                                <li><a href="/Comida%20brasileira">Comida brasileira</a></li>
-                                        <li><a href="/Transferencia%20de%20dinheiro">Transferencia de dinheiro</a></li>
-                                                <li><a href="/Aulas%20particulares">Aulas particulares</a></li>
-                                                        <li><a href="/Escolas">Escolas</a></li>
-                                                                <li><a href="/Mais">Mais ++</a></li>
-    </ul>
-    
-    </div>
+    <%Html.RenderPartial("PopularCategoriesSideBar", Model); %>
       
       <div class="site-add"><a href="#"><img src="img/add.jpg" width="164" height="600" /></a>
         <p>advertisement</p>
@@ -98,17 +79,17 @@
         <%{ %>
           <div class="post-standard">
             <div class="post-inner-lft">
-              <div class="post-img"><a href="details.html"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + m.Image1)%>&width=80&height=50" /></a></div>
+              <div class="post-img"><a href="<%=Url.DetailsUrl(m.Title,Model.CurrentCategory,m.SubCategory,m.AdId)%>"><img src="/FixedSizeImage?image=<%=(ConfigurationManager.AppSettings["DirAddImages"] + m.Image1)%>&width=80&height=50" /></a></div>
               <div class="post-title">
-                <h3><a href="<%=Url.DetailsUrl(m.Title,Model.CurrentCategory,m.AdId)%>"><%=m.Title %></a></h3>               
+                <h3><a href="<%=Url.DetailsUrl(m.Title,m.Category,m.SubCategory,m.AdId)%>"><%=Html.Encode(m.Title) %></a></h3>               
               </div>
               <div class="post-loc">
-                <p><%=m.Location %></p>
+                <p><%=Html.Encode(m.Location) %></p>
               </div>
             </div>
             <div class="post-inner-right">
               <div class="post-date">
-                <p><%=m.PostedDate %></p>
+                <p><%=m.PostedDate.ToShortDateString() %></p>
               </div>
             </div>
             </div>
@@ -120,7 +101,7 @@
         
         <!--pagination-->
         <div class="pagination">
-        <%=Html.PageLinks(Model.PagingInfo, Model.CurrentCategory)%>             
+        <%= Html.PageLinks(Model.PagingInfo, Model.Id, Model.CurrentCategory)%>
         
         </div>
         <!--end pagination-->

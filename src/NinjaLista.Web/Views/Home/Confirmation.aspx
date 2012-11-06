@@ -10,6 +10,8 @@
     <title>Account confirmation</title>
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
+    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -39,7 +41,7 @@
         <!--Breadcrumb-->
         <div class="breadcrumb">
             <p>
-                You are in:
+                Você está em:
             </p>
             <p>
                 <a href="#">Postar anúncio </a>
@@ -50,14 +52,15 @@
         <!--End Breadcrumb-->
         <div class="gen-box">
             <h1 class="green">
-                Anúncio postado!</h1>
+                <%=TempData["Title"]%></h1>
             <div class="partners-intro">
                 <p>
-                    <strong>Parabéns, o seu anúncio foi postado!</strong>
+                    <strong><%=TempData["Body"]%></strong>
                 </p>
-                <p>
+                <%=TempData["Body1"]%>
+                <%--<p>
                     Um email de confirmação foi enviado para o seu email fornecido, e seu anúncio estara
-                    disponível em nosso site dentro de alguns minutos.</p>
+                    disponível em nosso site dentro de alguns minutos.</p>--%>
                 <br />
                 <p>
                     <a href="/">Retornar a home page</a></p>

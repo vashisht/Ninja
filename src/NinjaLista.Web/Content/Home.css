@@ -6,13 +6,16 @@ li { border-bottom:1px dotted #969696; padding: 9px 2px; }
 #content-right li:hover { background:#fff4fa; }
 h2 { font-size:17px; font-weight:bold; padding:10px 0 10px 40px; color:#333; margin-bottom:10px; }
 .servicos { background-image: url(/img/servicos-bg.png); background-repeat: no-repeat; background-position: left center; }
+.serviços { background-image: url(/img/servicos-bg.png); background-repeat: no-repeat; background-position: left center; }
 .acomodacao { background-image: url(/img/acomodacao-bg.png); background-repeat: no-repeat; background-position: left center; }
+.acomodação { background-image: url(/img/acomodacao-bg.png); background-repeat: no-repeat; background-position: left center; }
 .empregos { background-image: url(/img/empregos-bg.png); background-repeat: no-repeat; background-position: left center; }
 .comunidade { background-image: url(/img/comunidade-bg.png); background-repeat: no-repeat; background-position: left center; }
 .relacionamento { background-image: url(/img/relacionamento-bg.png); background-repeat: no-repeat; background-position: left center; }
+.compra-venda { background-image: url(/img/compra-bg.jpg); background-repeat: no-repeat; background-position: left center; }
 .column-1, .column-2 { float:left; margin-right:70px; margin-left:8px; }
 .column-3 { float:right; margin-right:10px; }
-.column-4 { border:1px solid #ccc; overflow:hidden; padding: 0 10px; border-radius:5px; background-color:#fcfcfc; background-image:url(/img/pop-search-bg.png); background-repeat:no-repeat; background-position:left top;}
+.column-4 { border:1px solid #ccc; overflow:hidden; padding: 0 10px; border-radius:5px; background-color:#fcfcfc; background-image:url(/img/pop-search-bg.png); background-repeat:no-repeat; background-position:left top; clear:both;}
 .column-4 h2 {font-size:12px; padding-left:0px; margin:0px;}
 #content-right .column-4 ul {float:left; width:240px; margin-bottom:10px; }
 .column-4 ul li {border:none; font-size:9px; padding: 3px 2px;}

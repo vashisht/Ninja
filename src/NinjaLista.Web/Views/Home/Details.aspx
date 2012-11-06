@@ -9,10 +9,12 @@
     <meta name="robots" content="noindex">
     <link sizes="57x57" href="/img/icon.png" rel="apple-touch-icon-precomposed" />
     <link sizes="114x114" href="/img/icon-pc-hd.png" rel="apple-touch-icon-precomposed" />
-    <title>Details</title>
+    <title>Ninjalista classificados | Página de Anúncios</title>
    <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
     <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
+    
     <script type="text/javascript">
 
         var _gaq = _gaq || [];
@@ -46,8 +48,8 @@
     
     <!--Breadcrumb-->
     <div class="breadcrumb">
-      <p>You are in: </p> 
-      <p><a href="/">Home </a>><a href="<%=Url.ResultsUrl(Model.Category ,"1")%>"><%=Model.Category %></a> >
+      <p>Você está em: </p> 
+      <p><a href="/">Home </a><a href="<%=Url.ResultsUrl(Model.Category ,Model.SubCateogryId,"1")%>"><%=Model.Category %></a> >
       </p>
       <p><%=Model.Title%></p>
     </div>
@@ -55,7 +57,7 @@
           <!--content-left-->
  <div id="content-left">
         <div class="site-add"><a href="#"><img src="/img/add.jpg" width="164" height="600" /></a>
-            <p>advertisement</p>
+            <p>Anúncios</p>
         </div>
     </div>  
     <!--end content-left-->
@@ -63,14 +65,24 @@
      <div id="content-right">
         <div class="gen-box">
             <h1><%=Model.Title    %></h1>
-            <p class="back-results"><a href="<%=Url.ResultsUrl(Model.Category,"1") %>"> < Back to results</a></p>
+            <p class="back-results">
+                <%if (Model.link == null || Model.link == "")
+                  {
+                      %>
+                <a href="/"> < Back to home</a>
+                <%}
+                  else
+                  {%>
+                    <a href="<%=Model.link %>"> < Back to results</a>
+                  <%} %>
+            </p>
             <div class="ad-details">
                 <div class="ad-content">
-                    <p><%=Model.Description %></p>
+                    <p><%=Model.Description%></p>
                     <p>&nbsp;</p>
                     <p>Location: <%=Model.Location %></p>
                     
-                    <p>email: <a href="#"><%=Html.Encode(Model.Email)%></a></p>
+                   <%-- <p>email: <a href="#"><%=Html.Encode(Model.Email)%></a></p>--%>
                     <div class="reply-ad-bt"><%=Html.ActionLink("responda ao anúncio", "ReplyAd", "Home", new { id = Model.AdId}, new { @class = "button" })%></div>
                 </div>
                 <div class="ad-gallery">
@@ -81,7 +93,7 @@
                     
                 </div>
                 <div class="ad-footer">
-                    <p><a href="#">Report this ad</a></p>
+                    <!--<p><a href="#">Report this ad</a></p>-->
                     <div class="ad-date">Posted on: <span><%=Model.PostedDate.ToShortDateString()%></span></div>
                 </div>
             </div>

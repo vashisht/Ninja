@@ -20,11 +20,6 @@ namespace Ninjalista
             routes.IgnoreRoute("{folder}/{*pathInfo}", new { folder = "images" });
             routes.IgnoreRoute("{folder}/{*pathInfo}", new { folder = "img" });
 
-
-            routes.MapRoute("DetailsPage", //RouteName
-                            "details/{category}/{title}/{Id}",
-                            new { controller = "Home", action = "Details", category = "", title = "", Id="" });
-
             routes.MapRoute("details", //RouteName
                             "details",
                             new { controller = "Home", action = "details" }
@@ -42,6 +37,12 @@ namespace Ninjalista
                         "terms-and-conditions",
                         new { controller = "Home", action = "termsAndConditions" }
             );
+            routes.MapRoute("StaticPages", //RouteName
+                "Page/{page}",
+
+                new { controller = "Home", action = "Page" }
+              );
+     
             routes.MapRoute("policy", //RouteName
                        "privacy-policy",
                        new { controller = "Home", action = "policypage" }
@@ -93,12 +94,28 @@ namespace Ninjalista
                             , new { controller = "Error", Action = "PageNotFound" }
                );
 
-            routes.MapRoute("ResultsPage", //RouteName
-                "{categoryName}/{page}",
 
-                new { controller = "Home", action = "AdResults" ,page = UrlParameter.Optional}
+            routes.MapRoute("ResultsPage", //RouteName
+                "cat/{categoryName}/{Id}/{page}",
+
+                new { controller = "Home", action = "AdResultsByCategory", page = UrlParameter.Optional }
               );
-            
+            routes.MapRoute("SearchPage", //RouteName
+                "search/{keyword}/{page}",
+
+                new { controller = "Home", action = "SearchResults", keyword = "", page = UrlParameter.Optional }
+              );
+            routes.MapRoute("ResultsPageSubCategory", //RouteName
+                "{categoryName}/{subcategoryName}/{Id}/{page}",
+
+                new { controller = "Home", action = "AdResults", page = UrlParameter.Optional }
+              );
+
+
+            routes.MapRoute("DetailsPage", //RouteName
+                            "details/{category}/{subcategory}/{title}/{Id}",
+                            new { controller = "Home", action = "Details", category = "", subcategory = "", title = "", Id = "" });
+
             routes.MapRoute(
                              "Default", // Route name
                              "{controller}/{action}/{id}", // URL with parameters

@@ -97,6 +97,8 @@
     <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Services\ImageProcessor.cs" />
     <Compile Include="Views\Models\AdvertListModel.cs" />
+    <Compile Include="Views\Models\CategoryModel.cs" />
+    <Compile Include="Views\Models\PageModel.cs" />
     <Compile Include="Views\Models\SubCategoryModel.cs" />
     <Compile Include="Views\Models\ImageResizer.cs" />
     <Compile Include="Views\Models\PagingInfo.cs" />
@@ -110,6 +112,7 @@
     <Content Include="Content\fileuploader.css" />
     <Content Include="Content\geral.css" />
     <Content Include="Content\Home.css" />
+    <Compile Include="Controllers\HtmlRemoval.cs" />
     <Content Include="img\Default.png" />
     <Content Include="img\loading.gif" />
     <Content Include="img\uploadify-cancel.png" />
@@ -184,6 +187,9 @@
     <Content Include="Views\Home\AdResults.aspx" />
     <Content Include="Views\Home\Confirmation.aspx" />
     <Content Include="Views\Home\Contato.aspx" />
+    <Content Include="Views\Home\SearchResults.aspx" />
+    <Content Include="Views\Home\page.aspx" />
+    <Content Include="Views\Home\Index0.aspx" />
     <Content Include="Views\Home\Details.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Linksuteisemlondres.aspx" />
@@ -193,6 +199,7 @@
     <Content Include="Views\Home\PreviewAd.aspx" />
     <Content Include="Views\Home\ReplyAd.aspx" />
     <Content Include="Views\Home\termsAndConditions.aspx" />
+    <Content Include="Views\Shared\PopularCategoriesSideBar.ascx" />
     <Content Include="Views\Shared\SubCategoryDropdown.ascx" />
     <Content Include="Views\Shared\menu.ascx" />
     <Content Include="Views\Shared\Footer.ascx" />
@@ -257,7 +264,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55334</DevelopmentServerPort>
+          <DevelopmentServerPort>18060</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

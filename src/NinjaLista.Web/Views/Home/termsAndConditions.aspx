@@ -11,6 +11,8 @@
 <title>Termos e condições</title>
    <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/default.css") %>" />
     <link rel="stylesheet" type="text/css" href="<%= Url.Content("~/Content/geral.css") %>" />
+    <script type="text/javascript" src="/Scripts/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="/Scripts/jquery.validate.js"></script>
 <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -31,7 +33,7 @@
 <div id="content-main"> 
     <%Html.RenderPartial("SearchContainer"); %>
     
-  <div class="breadcrumb"><p>You are in: </p> 
+  <div class="breadcrumb"><p>Você está em: </p> 
       <p><a href="/">Home </a>> Termos e condições</p>
     </div>
     <div class="gen-box">

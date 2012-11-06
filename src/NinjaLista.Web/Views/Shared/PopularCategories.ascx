@@ -1,26 +1,56 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<NinjaLista.Views.Models.CategoryModel>" %>
     <div class="column-4">
       <h2>Pesquisas populares</h2>
-      <ul>
-        <li><a href="/casas%20para%20alugar">casas para alugar</a></li>
-        <li><a href="/Aluguel%20de%20quartos">Aluguel de quartos em Londres</a></li>
-        <li><a href="/Baladas">Baladas em londres </a></li>
-        <li><a href="/Emprego e trabalho">Emprego e trabalho em londres</a></li>
-        <li><a href="/Brasileiro">Brasileiro em londres</a></li>
-      </ul>
-      <ul>
-        <li><a href="/Linhas">Linhas aéreas</a></li>
-        <li><a href="/Escolas de cursos">Escolas de cursos em londres</a></li>
-        <li><a href="/Classificados">Classificados </a></li>
-        <li><a href="/Agenda de show">Agenda de show</a></li>
-        <li><a href="/Dentista">Dentista em Londres</a></li>
-      </ul>
-      <ul>
-        <li><a href="/restaurante">restaurante em londres</a></li>
-        <li><a href="/Consulado">Consulado brasileiro em Londres</a></li>
-        <li><a href="/Comunidade">Comunidade brasileira </a></li>
-        <li><a href="/Igreja">Igreja em londres</a></li>
-      </ul>
+      <%if (Model.poplinklist != null && Model.poplinklist.Count > 0)  %>
+      <%{ %>
+      <% int count = 0; int Count1 = 0; int count3 = Model.poplinklist.Count;   %>
+       <%  count =  (int)Math.Ceiling(Convert.ToDecimal(Model.poplinklist.Count/3.00));%>
+       
+       <% Count1 = count + count; %>
+       <ul>
+         <% for( int i=0; i < count; i++)  %>
+
+         <%{ %>
+         <li><a href="<%=Model.poplinklist[i].Link %>"><%=Model.poplinklist[i].Title  %></a></li>
+
+          
+       <%} %>
+       </ul>
+
+       <ul>
+       <%if(Model.poplinklist.Count > Count1 ) %>
+
+       <%{ %>
+         <% for( int j=count; j < Count1; j++)  %>
+
+         <%{ %>
+         <li><a href="<%=Model.poplinklist[j].Link %>"><%=Model.poplinklist[j].Title  %></a></li>
+
+          
+       <%} %>
+
+       <%} %>
+
+       </ul>
+
+       <ul>
+
+       
+
+       
+         <% for (int k = Count1;   k < Model.poplinklist.Count ; k++)  %>
+
+         <%{ %>
+         <li><a href="<%=Model.poplinklist[k].Link %>"><%=Model.poplinklist[k].Title  %></a></li>
+
+          
+       <%} %>
+       
+       
+       </ul>
+
+      <%} %>
+      
     </div>
 
 

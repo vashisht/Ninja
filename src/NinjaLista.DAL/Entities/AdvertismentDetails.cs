@@ -27,9 +27,12 @@ namespace Ninjalista.DAL.Entities
         public string DetailsUrl { get; set; }
         public int AdId { get; set; }
         public string Category { get; set; }
+        public string SubCategory { get; set; }
         public string Image1 { get; set; }
         public string Image2 { get; set; }
         public string Image3 { get; set; }
+        public string link { get; set; }
+        public bool Active { get; set; }
 
     }
 }

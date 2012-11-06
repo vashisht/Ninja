@@ -31,14 +31,14 @@ a:hover { text-decoration:underline; color:#f7008e; }
 #login-container { width:993px; height:24px; margin:0 auto; padding-top: 6px; overflow:hidden; }
 #login-container a:link, #login-container a:visited { color:#e9ce1a; }
 #login-container a:hover { text-decoration:underline; }
-#login-container .country { width:300px; float:left; padding-left:5px; }
+#login-container .country {  float:left; padding-left:5px; }
 #login-container .country img { margin:0 7px 0 0; }
 #login-container .social { float:right; text-align:center; margin-right:10px; overflow:hidden; min-width:226px; }
 #login-container .social p { float:left; margin-right:10px; }
 #login-container .social img { margin:1px 7px 0 0; float:left; }
 #login-container .details { float:right; padding: 0 10px; }
 #login-container .details p { display:inline; margin:0px 5px; }
-#login-container .country p { float:left; margin:0px 10px; }
+#login-container .country p { float:right; margin:0px 10px; }
 /*End login area*/
 
 /*Header*/
@@ -65,7 +65,7 @@ a:hover { text-decoration:underline; color:#f7008e; }
 #searchbox { background-color:#dbdbdb; width:941px; height:28px; padding:6px 6px 6px 15px; font-weight:bold; float:left; }
 #searchbox p, #searchbox input { float:left; }
 #searchbox p { margin-top:8px; color:#404040; }
-#searchbox .search-fields { width:330px; height: 21px; margin:0px 17px; padding:2px 0 3px 5px; }
+#searchbox .search-fields { width:730px; height: 21px; margin:0px 17px; padding:2px 0 3px 5px; }
 #searchbox .submit-search { border-top: 1px solid #d23590; background: #da007e; padding: 5.5px 11px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0; -moz-box-shadow: rgba(0,0,0,1) 0 1px 0; box-shadow: rgba(0,0,0,1) 0 1px 0; text-shadow: rgba(0,0,0,.4) 0 1px 0; color: #ffffff; font-size: 10px; font-family: Verdana, Geneva, sans-serif; text-decoration: none; vertical-align: middle; text-transform:uppercase; font-weight:bold; }
 #fb-like { width:182px; float:right; height:35px; }
 #searchbox .button { *width:80px;}
@@ -78,7 +78,7 @@ a:hover { text-decoration:underline; color:#f7008e; }
 
 /*Footer*/
 #footer-main { width:953px; border:1px solid #dbdbdb; margin:0 auto; margin-top:20px; margin-bottom:20px; padding:20px; font-weight:bold; background-color:#fff;  box-shadow:0 0 5px #dcdcdc}
-#newsletter { background-color:#e30386; height:24px; padding:6px 10px; }
+#newsletter { background-color:#e30386;  padding:6px 10px; }
 #newsletter input { width:373px; height:23px; color:#3c3c3c; padding-left:5px; }
 #newsletter input.button { width:90px; background:#000; color:#fff; border:none; cursor:pointer; padding:0 0 2px; }
 #newsletter input.button:hover { background:#121212; }
